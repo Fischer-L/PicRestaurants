@@ -30,6 +30,6 @@
   },
   "scripts": {
     "build": "webpack",
-    "start": "node ./server/server.js"
+    "start": "yarn build && node ./server/server.js"
   }
 }
