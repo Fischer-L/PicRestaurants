@@ -25,7 +25,8 @@ html, body, #root, .App {
 .app-content-area {
   width: get-var("app-width");
   max-width: get-var("app-max-width");
-  padding-bottom: 10em;
+  min-width: 320px;
+  padding: 0 0.5em 10em 0.5em;
   margin: 0 auto;
   margin-top: $app-nav-bar-top-height;
 }
@@ -34,5 +35,6 @@ html, body, #root, .App {
   .app-content-area {
     width: get-var("app-width", "big");
     max-width: get-var("app-max-width", "big");
+    padding: 0 0 10em 0;
   }
 }

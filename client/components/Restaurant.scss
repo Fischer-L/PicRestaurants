@@ -1,0 +1,77 @@
+@import "AppEnv.scss";
+
+.app-restaurant {
+  width: 45%;
+  height: 20em;
+  border: 1px solid $app-border-color;
+  margin-top: 3em;
+  background: #fff;
+  display: flex;
+}
+
+.app-restaurant__link {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.app-restaurant__img {
+  width: 100%;
+  height: 50%;
+  border-radius: 0;
+  background: center/cover no-repeat;
+  display: block;
+  flex: 1;
+}
+
+.app-restaurant__body {
+  width: 100%;
+  flex: 1;
+  padding: 0.8em 1.2em 0.3em 1.2em;
+  position: relative;
+}
+
+.app-restaurant-title {
+  width: 100%;
+  padding: 0;
+  margin: 0.5em 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-restaurant__info {
+  max-height: 62%;
+  padding: 0;
+  margin: 0.5em 0;
+  font-size: 0.67em;
+  color: #777;
+  list-style: none;
+  overflow: hidden;
+}
+
+.app-restaurant__info-item {
+  margin-bottom: 0.5em;
+}
+
+.app-restaurant-rating {
+  position: absolute;
+  bottom: 1em;
+}
+
+@media screen and (min-width: $app-big-screen-width) {
+  .app-restaurant {
+    width: 30%;
+    border-radius: 2px;
+  }
+
+  .app-restaurant__img {
+    border-radius: 2px 2px 0 0;
+  }
+
+  .app-restaurant__body {
+    flex: 1;
+    padding: 0.8em 1.2em 0.3em 1.2em;
+  }
+}

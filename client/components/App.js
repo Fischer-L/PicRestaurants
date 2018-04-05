@@ -2,14 +2,15 @@ import React, { Component } from "react";
 
 import "./App.scss";
 
-import NavBar from "./NavBar"
+import NavBar from "./NavBar";
+import RestaurantList from "./RestaurantList";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <NavBar />
-        Hello App
+        <RestaurantList />
       </div>
     );
   }
