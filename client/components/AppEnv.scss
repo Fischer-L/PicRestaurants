@@ -1,0 +1,18 @@
+$app-color: #2c3e50;
+$app-border-color: #f1f1f1;
+$app-big-screen-width: 48em;
+$app-nav-bar-top-height: 2em;
+$app-nav-bar-btm-height: 3em;
+
+@function get-var($name, $width-size: "small") {
+  $app-width: 100%;
+  $app-max-width: 100%;
+
+  @if $width-size == "big" {  
+    $app-width: 80%;
+    $app-max-width: 960px;
+  }
+
+  @if $name == "app-width" { @return $app-width; }
+  @if $name == "app-max-width" { @return $app-max-width; }
+}

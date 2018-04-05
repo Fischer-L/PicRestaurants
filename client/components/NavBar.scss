@@ -1,0 +1,41 @@
+@import "AppEnv.scss";
+
+.app-navbar {
+  padding: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.app-navbar__top {
+  width: 100%;
+  height: $app-nav-bar-top-height;
+  background: $app-color;
+}
+
+.app-navbar__title {
+  height: $app-nav-bar-top-height;
+  line-height: $app-nav-bar-top-height;
+  padding: 0;
+  margin: 0 auto;
+  font-size: 105%;
+  font-weight: lighter;
+  text-align: center;
+  color: #fff;
+  display: block;
+}
+
+.app-navbar__bottom {
+  height: $app-nav-bar-btm-height;
+  border-bottom: 1px solid $app-border-color;
+}
+
+.app-navbar__panel {
+  height: 100%;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
