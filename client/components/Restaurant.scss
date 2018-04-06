@@ -1,7 +1,7 @@
 @import "AppEnv.scss";
 
 .app-restaurant {
-  width: 45%;
+  width: 47%;
   height: 20em;
   border: 1px solid $app-border-color;
   margin-top: 3em;
@@ -9,11 +9,16 @@
   display: flex;
 }
 
-.app-restaurant__link {
+.app-restaurant__link,
+.app-restaurant__link:hover,
+.app-restaurant__link:active {
   width: 100%;
   height: 100%;
   display: flex;
   flex-flow: column wrap;
+  text-decoration: none;
+  color: unset;
+  outline: 0;
 }
 
 .app-restaurant__img {
@@ -36,6 +41,7 @@
   width: 100%;
   padding: 0;
   margin: 0.5em 0;
+  font-size: 1.1em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

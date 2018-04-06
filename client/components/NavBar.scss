@@ -6,6 +6,7 @@
   top: 0;
   right: 0;
   left: 0;
+  z-index: 999;
 }
 
 .app-navbar__top {
@@ -29,6 +30,7 @@
 .app-navbar__bottom {
   height: $app-nav-bar-btm-height;
   border-bottom: 1px solid $app-border-color;
+  background: #fff;
 }
 
 .app-navbar__panel {

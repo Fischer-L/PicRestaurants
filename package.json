@@ -33,7 +33,7 @@
   },
   "scripts": {
     "build": "npm run clean && npm run copy_assets && webpack",
-    "start": "npm-run-all build server",
+    "start": "npm-run-all -p build server",
     "server": "node ./server/server.js",
     "copy_assets": "copyfiles client/assets/*.* client/assets/**/*.* ./dist/assets -f",
     "clean": "rimraf ./dist"

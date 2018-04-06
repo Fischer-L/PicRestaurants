@@ -20,19 +20,14 @@ function getRestaurants(query, onOK, onError) {
       total
       business {
         name
+        url
         rating
-        review_count
         photos
-        is_closed
         display_phone
         location {
-          address1
-          city
-          state
-          country
+          formatted_address
         }
         hours {
-          is_open_now
           open {
             end
             start

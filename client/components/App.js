@@ -6,6 +6,8 @@ import NavBar from "./NavBar";
 import RestaurantList from "./RestaurantList";
 
 class App extends Component {
+
+
   render() {
     return (
       <div className="App">

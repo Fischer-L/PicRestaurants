@@ -8,12 +8,17 @@ import Restaurant from "./Restaurant";
 class RestaurantList extends Component {
 
   render() {
+    let restaurants = this.props.restaurants.map((data, i) => {
+      return <Restaurant data={data} key={i} />
+    });
     return (
       <section className="app-restaurant-list app-content-area">
-        <Restaurant />
+        {restaurants}
       </section>
     );
   }
 }
 
-export default connect(state => state)(RestaurantList);
+export default connect(state => ({
+  restaurants: state.restaurants
+}))(RestaurantList);
