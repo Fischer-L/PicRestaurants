@@ -18,19 +18,23 @@ const yelpRatingIcons = new Map([
 
 class Restaurant extends Component {
 
-  _findOpenIntervalForNow(open) {
-    let now = new Date();
-    // The day format from the server a bit different
-    let day = now.getDay() - 1;
-    if (day < 0) {
-      day = 6;
-    }
-    let interval = open.find(time => time.day == day);
-    if (interval) {
-      return {
-        end: `${interval.end.subStr(0, 2)}:${interval.end.subStr(2, 2)}`, 
-        start: `${interval.start.subStr(0, 2)}:${interval.start.subStr(2, 2)}`
-      };
+  _findOpenTime(restaurant, date) {
+    let hh = date.getHours();
+    let mm = date.getMinutes();
+    let day = date.getDay();
+    for (let i = restaurant.openDays.length - 1; i >= 0; --i) {
+      let time = restaurant.openDays[i];
+      if (time.day === day) {
+        let endHH = parseInt(time.end.substr(0, 2));
+        let endMM = parseInt(time.end.substr(3, 2));
+        if (hh <= endHH && mm <= endMM) {
+          let startHH = parseInt(time.start.substr(0, 2));
+          let startMM = parseInt(time.start.substr(3, 2));
+          if (hh >= startHH && mm >= startMM) {
+            return time;
+          }
+        }
+      }
     }
     return null;
   }
@@ -38,9 +42,9 @@ class Restaurant extends Component {
   render() {
     let data = this.props.data;
     let name = data.name;
-    let url = encodeURI(data.url) || "javascript:void(0)";
+    let url = data.url ? encodeURI(data.url) : "javascript:void(0)";
     let address = data.address;
-    let phone = data.display_phone || "";
+    let phone = data.displayPhone || "";
 
     let photo = "./assets/placeholder_img.png";
     if (data.photos &&  data.photos.length) {
@@ -52,12 +56,11 @@ class Restaurant extends Component {
 
     let rating = data.rating > 0 ? data.rating : 0;
     let ratingImg = yelpRatingIcons.get(rating);
-
-    let interval = this._findOpenIntervalForNow(data.open);
-    if (interval) {
-      interval = `${interval.start} ~ ${interval.end}`;
+    let open = this._findOpenTime(data, new Date());
+    if (open) {
+      open = `${open.start} ~ ${open.end}`;
     } else {
-      interval = "Closed";
+      open = "Not in open hour"
     }
 
     return (
@@ -67,7 +70,7 @@ class Restaurant extends Component {
           <div className="app-restaurant__body">
             <h6 className="app-restaurant-title">{name}</h6>
             <ul className="app-restaurant__info">
-              <li className="app-restaurant__info-item">{interval}</li>
+              <li className="app-restaurant__info-item">{open}</li>
               <li className="app-restaurant__info-item">{phone}</li>
               <li className="app-restaurant__info-item">{address}</li>
             </ul>

@@ -2,7 +2,7 @@ $app-color: #2c3e50;
 $app-border-color: #f1f1f1;
 $app-big-screen-width: 48em;
 $app-nav-bar-top-height: 2em;
-$app-nav-bar-btm-height: 3em;
+$app-nav-bar-btm-height: 3.5em;
 
 @function get-var($name, $width-size: "small") {
   $app-width: 100%;

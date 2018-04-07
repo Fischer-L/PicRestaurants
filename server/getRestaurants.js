@@ -11,13 +11,9 @@ function getRestaurants(query, onOK, onError) {
     `sort_by: "rating"`,
     `location: "${query.location}"`
   ];
-  if (query.open_at && query.open_at > 0) {
-    querys.push(`open_at: ${query.open_at}`);
-  }
 
   let postData = `{
     search(${querys.join(",")}) {
-      total
       business {
         name
         url

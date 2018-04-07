@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { setRestaurants } from "../actions";
+import { searchRestaurants } from "../utils";
 
 import "./NavBar.scss";
 
@@ -15,9 +16,9 @@ class NavBar extends Component {
       "photos": [
         "https://s3-media2.fl.yelpcdn.com/bphoto/_nN_DhLXkfwEkwPNxne9hw/o.jpg"
       ],
-      "display_phone": "(415) 644-0838",
+      "displayPhone": "(415) 644-0838",
       "address": "475 3rd St\nSan Francisco, CA 94107",
-      "open": [
+      "openDays": [
         {
           "end": "2200",
           "start": "1130",
@@ -52,7 +53,9 @@ class NavBar extends Component {
     };
     data = [ data, data, data ];
     console.log("TMP> setRestaurants");
-    this.props.setRestaurants(data);
+    // this.props.setRestaurants(data);
+
+    searchRestaurants("taipei").then(data => this.props.setRestaurants(data));
   }
 
   render() {
@@ -63,10 +66,10 @@ class NavBar extends Component {
         </section>
         <section className="app-navbar__bottom">
           <div className="app-navbar__panel app-content-area">
-            <input type="text" placeholder="Taipei" />
-            <input type="date" />
-            <input type="time" />
-            <button>Search</button>
+            <input className="app-navbar__loc" type="text" placeholder="Taipei" />
+            <input className="app-navbar__date" type="date" />
+            <input className="app-navbar__time" type="time" />
+            <button className="app-navbar__search">Search</button>
           </div>
         </section>
       </nav>

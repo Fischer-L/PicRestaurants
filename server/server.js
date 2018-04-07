@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require("path");
-const getRestaurants = require("./restaurants");
+const getRestaurants = require("./getRestaurants");
 
 const app = express();
 
@@ -17,8 +17,7 @@ app.get("/", (req, res) => {
 
 app.get("/restaurants", (req, res) => {
   let query = {
-    location: req.query.location,
-    open_at: req.query.open_at
+    location: req.query.location
   };
   let onOK = data => res.send(data);
   let onError = e => {
