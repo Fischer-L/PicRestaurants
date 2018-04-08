@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import "./RestaurantList.scss";
 
 import Restaurant from "./Restaurant";
+import StatusMessage from "./StatusMessage";
 
 class RestaurantList extends Component {
 
@@ -99,19 +100,45 @@ class RestaurantList extends Component {
     return restaurants;
   }
 
+  _renderIdleMessage() {
+    let img = "./assets/restaurant.svg";
+    let mainMsg = "Pick a Restaturants";
+    let subMsg = "Input your location to search great restaurants around you";
+    return <StatusMessage img={img} mainMsg={mainMsg} subMsg={subMsg} />
+  }
+
   render() {
-    let restaurants = this._renderRestaurants(
-      this.props.restaurantsData, this.props.targetDate, this.props.targetTime);
-    console.log("TMP> RestaurantList", this.props.restaurantsData, restaurants.length);
+    let childNode = null;
+
+    switch (this.props.status) {
+      case "status_search done":
+        if (this.props.restaurantsData.length) {
+          childNode = this._renderRestaurants(
+            this.props.restaurantsData, this.props.targetDate, this.props.targetTime);
+        } else {
+          // TODO render not found
+        }
+        break;
+
+      case "status_searching":
+        break;
+
+      default:
+      case "status_idle":
+        childNode = this._renderIdleMessage();
+        break;
+    }
+
     return (
       <section className="app-restaurant-list app-content-area">
-        {restaurants}
+        {childNode}
       </section>
     );
   }
 }
 
 export default connect(state => ({
+  status: state.state,
   restaurantsData: state.restaurantsData,
   targetDate: state.searchCondition.targetDate,
   targetTime: state.searchCondition.targetTime

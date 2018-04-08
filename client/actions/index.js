@@ -8,7 +8,7 @@ export const setSearchCondition = (targetLoc, targetDate, targetTime) => ({
   searchCondition: { targetLoc, targetDate, targetTime }
 });
 
-export const setLoadingState = isLoading => ({
-  type: "SET_LOADING_STATE",
-  isLoading
+export const setAppStatus = status => ({
+  type: "SET_APP_STATUS",
+  status
 });

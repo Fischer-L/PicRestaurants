@@ -42,7 +42,10 @@ APP_TYPE.searchCondition = PropTypes.shape({
   targetTime: APP_TYPE.targetTime
 });
 
-APP_TYPE.isLoading = PropTypes.bool.isRequired;
+// status_idle: Waiting user to search restaurants
+// status_searching: Loading restaurants
+// status_search_done: Done with the restaurants search
+APP_TYPE.status = PropTypes.string.isRequired;
 
 export { APP_TYPE };
 
@@ -75,15 +78,15 @@ function searchCondition(state = defaultSearchCondition(), action) {
   return state;
 }
 
-function isLoading(state = false, action) {
+function status(state = "status_idle", action) {
   switch (action.type) {
-    case "SET_LOADING_STATE":
-      state = action.isLoading;
+    case "SET_APP_STATUS":
+      state = action.status;
       break;
   }
   return state;
 }
 
 export default combineReducers({
-  restaurantsData, searchCondition, isLoading
+  restaurantsData, searchCondition, status
 });

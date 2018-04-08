@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { setRestaurants, setSearchCondition, setLoadingState } from "../actions";
+import { setRestaurants, setSearchCondition, setAppStatus } from "../actions";
 import { searchRestaurants } from "../utils";
 
 import "./NavBar.scss";
@@ -92,11 +92,12 @@ class NavBar extends Component {
     this.locInput.classList.remove("app-navbar--warning");
 
     this.props.setSearchCondition(targetLoc, targetDate, targetTime);
-    this.props.setLoadingState(true);
+    this.props.setAppStatus("status_searching");
     window.requestAnimationFrame(async () => {
       console.log("TMP> search - targetLoc, targetDate, targetTime", targetLoc, targetDate, targetTime);
       let data = await searchRestaurants(targetLoc);
       this.props.setRestaurants(data);
+      this.props.setAppStatus("status_search_done");
     });
   }
 
@@ -128,5 +129,5 @@ export default connect(state => ({
 }), {
   setRestaurants,
   setSearchCondition,
-  setLoadingState
+  setAppStatus
 })(NavBar);
