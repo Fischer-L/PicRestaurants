@@ -23,7 +23,7 @@ class Restaurant extends Component {
     let name = data.name;
     let url = data.url ? encodeURI(data.url) : "javascript:void(0)";
     let address = data.address;
-    let open = data.open;
+    let businessHour = data.businessHour;
     let phone = data.displayPhone || "";
 
     let rating = data.rating > 0 ? data.rating : 0;
@@ -42,7 +42,7 @@ class Restaurant extends Component {
           <div className="app-restaurant__body">
             <h6 className="app-restaurant-title">{name}</h6>
             <ul className="app-restaurant__info">
-              <li className="app-restaurant__info-item">{open}</li>
+              <li className="app-restaurant__info-item">{businessHour}</li>
               <li className="app-restaurant__info-item">{phone}</li>
               <li className="app-restaurant__info-item">{address}</li>
             </ul>

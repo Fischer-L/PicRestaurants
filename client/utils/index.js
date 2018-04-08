@@ -163,6 +163,6 @@ async function searchRestaurants(location) {
     console.error(e);
   }
   return data;
-};
+}
 
 export { searchRestaurants };

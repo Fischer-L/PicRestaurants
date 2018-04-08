@@ -1,4 +1,4 @@
-export const setRestaurants = restaurants => ({
+export const setRestaurants = restaurantsData => ({
   type: "SET_RESTAURANTS_DATA",
   restaurantsData
 });

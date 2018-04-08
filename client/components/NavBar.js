@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { setSearchCondition } from "../actions";
+import { setRestaurants, setSearchCondition, setLoadingState } from "../actions";
 import { searchRestaurants } from "../utils";
 
 import "./NavBar.scss";
@@ -84,8 +84,18 @@ class NavBar extends Component {
     let targetLoc = this.locInput.value;
     let targetDate = this.dateInput.value;
     let targetTime = this.timeInput.value;
-    console.log("TMP> search - targetLoc, targetDate, targetTime", targetLoc, targetDate, targetTime);
+    // Only go searching if there is really a location to search.
+    if (!targetLoc) {
+      return;
+    }
+
     this.props.setSearchCondition(targetLoc, targetDate, targetTime);
+    this.props.setLoadingState(true);
+    window.requestAnimationFrame(async () => {
+      console.log("TMP> search - targetLoc, targetDate, targetTime", targetLoc, targetDate, targetTime);
+      let data = await searchRestaurants(targetLoc);
+      this.props.setRestaurants(data);
+    });
   }
 
   render() {
@@ -114,5 +124,7 @@ export default connect(state => ({
   targetLoc: state.targetLoc,
   searchCondition: state.searchCondition
 }), {
-  setSearchCondition
+  setRestaurants,
+  setSearchCondition,
+  setLoadingState
 })(NavBar);
