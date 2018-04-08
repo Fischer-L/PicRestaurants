@@ -194,7 +194,7 @@ async function searchRestaurants(location) {
     if (resp.status !== 200) {
       // We are perfoming a "GET" method so expect a 200 response.
       // If not, throw and let below log it.
-      throw `Search restaturants with the response of ${resp.status}`;
+      throw `Search restaurants with the response of ${resp.status}`;
     }
 
     data = await resp.json();

@@ -110,7 +110,7 @@ class RestaurantList extends Component {
   _renderNotFoundMessage() {
     let img = "./assets/coffe.svg";
     let mainMsg = "No Restaurants";
-    let subMsg = "Find no restaturants around the input location";
+    let subMsg = "Find no restaurants around the input location";
     return (<StatusMessage img={img} mainMsg={mainMsg} subMsg={subMsg} />);
   }
 
