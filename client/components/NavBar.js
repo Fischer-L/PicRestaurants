@@ -67,7 +67,7 @@ class NavBar extends Component {
   }
 
   // User may changes the location, date and time many times.
-  // We only want to set the search condition state when user 
+  // We only want to update the search condition state when user 
   // explictly commands the search operation to reduce unneccessary reflows.
   // So we populate the input values inside our component here.
   _populateSearchCondition() {
@@ -84,10 +84,12 @@ class NavBar extends Component {
     let targetLoc = this.locInput.value;
     let targetDate = this.dateInput.value;
     let targetTime = this.timeInput.value;
-    // Only go searching if there is really a location to search.
+    // Only proceed if there is really a location to search.
     if (!targetLoc) {
+      this.locInput.classList.add("app-navbar--warning");
       return;
     }
+    this.locInput.classList.remove("app-navbar--warning");
 
     this.props.setSearchCondition(targetLoc, targetDate, targetTime);
     this.props.setLoadingState(true);

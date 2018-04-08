@@ -22,6 +22,11 @@ class RestaurantList extends Component {
     return -1;
   }
 
+  _withinTimeInterval(hh, mm, start, end) {
+    return this._compareTime(hh, mm, end.hh, end.mm) <= 0 &&
+           this._compareTime(hh, mm, start.hh, start.mm) >= 0
+  }
+
   _formatTime(hh, mm) {
     if (hh < 10) {
       hh = "0" + hh;
@@ -35,9 +40,14 @@ class RestaurantList extends Component {
   _renderRestaurants(restaurantsData, targetDate, targetTime) {
     let closed = [];
     let opening = [];
-    let day = (new Date(targetDate)).getDay();
-    let hh = parseInt(targetTime.substr(0, 2));
-    let mm = parseInt(targetTime.substr(3, 2));
+    let date = targetDate ? new Date(targetDate) : new Date();
+    let day = date.getDay();
+    let hh = null;
+    let mm = null;
+    if (targetTime) {
+      hh = parseInt(targetTime.substr(0, 2));
+      mm = parseInt(targetTime.substr(3, 2));
+    }
 
     restaurantsData.forEach((data, idx) => {
       let props = {
@@ -59,8 +69,7 @@ class RestaurantList extends Component {
       for (let i = data.openDays.length - 1; i >= 0; --i) {
         let time = data.openDays[i];
         if (day === time.day && 
-            this._compareTime(hh, mm, time.end.hh, time.end.mm) <= 0 &&
-            this._compareTime(hh, mm, time.start.hh, time.start.mm) >= 0
+            (!targetTime || this._withinTimeInterval(hh, mm, time.start, time.end))
         ) {
           let end = this._formatTime(time.end.hh, time.end.mm);
           let start = this._formatTime(time.start.hh, time.start.mm);
@@ -79,17 +88,14 @@ class RestaurantList extends Component {
 
     // We would like to put opening restaurants in the front
     let restaurants = opening.reduce((restaurants, props) => {
-      console.log("TMP> ", props.name);
       restaurants.push(<Restaurant {...props} />);
       return restaurants;
     }, []);
     
     restaurants = closed.reduce((restaurants, props) => {
-      console.log("TMP> ", props.name);
       restaurants.push(<Restaurant {...props} />);
       return restaurants;
     }, restaurants);
-    console.log("TMP> RestaurantList - opening.length, closed.length", opening.length, closed.length);
     return restaurants;
   }
 

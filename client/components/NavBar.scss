@@ -48,6 +48,10 @@
   margin-right: 1em;
 }
 
+.app-navbar__loc.app-navbar--warning {
+  outline: 1px solid #e84747;
+}
+
 .app-navbar__date,
 .app-navbar__time {
   width: 20%;
