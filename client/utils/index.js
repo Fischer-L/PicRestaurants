@@ -1,3 +1,44 @@
+function doLater(task) {
+  // `requestIdleCallback` gets less support so...
+  let later = window.requestIdleCallback || window.requestAnimationFrame;
+  later(task);
+}
+
+// We go the sessionStorage for the local cache first,
+// because here we are not sure the update frequency of
+// restaurants data in the 3rd-part Yelp.
+// If went the indexedDB, we might save outdated data. 
+const cache = {
+  set(location, data) {
+    if (location && data) {
+      doLater(() => {
+        sessionStorage.setItem(location, JSON.stringify(data));
+      });
+    }
+  },
+
+  async get(location) {
+    if (!location) {
+      return Promise.resolve(null);
+    }
+    return new Promise(resolve => {
+      doLater(() => {
+        let data = null;
+        try {
+          data = sessionStorage.getItem(location)
+          if (data) {
+            data = JSON.parse(data);
+          }
+        } catch (e) {
+          data = null;
+          console.error(e);
+        }
+        resolve(data);
+      });
+    });
+  }
+}
+
 function isScriptingURL(url) {
   return url.indexOf("javascript") === 0;
 }
@@ -141,7 +182,12 @@ function sanitizeRestaurants(restaurants) {
  * @return {Array} the restaurants
  */
 async function searchRestaurants(location) {
-  let data = [];
+  let data = await cache.get(location);
+  if (data) {
+    return data;
+  }
+
+  data = [];
   try {
     let query = `location=${location}`;
     let resp = await fetch(`http://localhost:3000/restaurants?${query}`, { method: "GET" });
@@ -162,6 +208,7 @@ async function searchRestaurants(location) {
     // Print out so know what's wrong.
     console.error(e);
   }
+  cache.set(location, data);
   return data;
 }
 

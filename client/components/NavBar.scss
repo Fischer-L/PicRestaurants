@@ -56,10 +56,18 @@
 .app-navbar__time {
   width: 20%;
   min-width: 110px;
-  margin-right: 1em;
+  margin-right: 0.5em;
 }
 
 .app-navbar__search {
   width: 66px;
+  padding: 2px 0;
   color: #666;
+}
+
+.app-navbar__loc,
+.app-navbar__date,
+.app-navbar__time ,
+.app-navbar__search {
+  border: 1px solid #eee;
 }

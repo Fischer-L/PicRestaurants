@@ -45,7 +45,7 @@ class NavBar extends Component {
     this.props.setAppStatus("status_searching");
     window.requestAnimationFrame(async () => {
       console.log("TMP> search - targetLoc, targetDate, targetTime", targetLoc, targetDate, targetTime);
-      let data = await searchRestaurants(targetLoc);
+      let data = await searchRestaurants(targetLoc.toLowerCase());
       this.props.setRestaurants(data);
       this.props.setAppStatus("status_search_done");
     });
