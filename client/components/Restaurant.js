@@ -25,7 +25,7 @@ class Restaurant extends Component {
     let url = data.url ? encodeURI(data.url) : "javascript:void(0)";
     let address = data.address;
     let businessHour = data.businessHour;
-    let phone = data.displayPhone || "";
+    let phone = data.phone || "";
 
     let rating = data.rating > 0 ? data.rating : 0;
     let ratingImg = yelpRatingIcons.get(rating);
