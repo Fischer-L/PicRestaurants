@@ -61,7 +61,6 @@
 
 .app-navbar__search {
   width: 66px;
-  padding: 2px 0;
   color: #666;
 }
 
@@ -69,5 +68,6 @@
 .app-navbar__date,
 .app-navbar__time ,
 .app-navbar__search {
+  height: 2em;
   border: 1px solid #eee;
 }
