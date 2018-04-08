@@ -104,19 +104,27 @@ class RestaurantList extends Component {
     let img = "./assets/restaurant.svg";
     let mainMsg = "Pick a Restaturants";
     let subMsg = "Input your location to search great restaurants around you";
-    return <StatusMessage img={img} mainMsg={mainMsg} subMsg={subMsg} />
+    return (<StatusMessage img={img} mainMsg={mainMsg} subMsg={subMsg} />);
+  }
+
+  _renderNotFoundMessage() {
+    let img = "./assets/coffe.svg";
+    let mainMsg = "No Restaurants";
+    let subMsg = "Find no restaturants around the input location";
+    return (<StatusMessage img={img} mainMsg={mainMsg} subMsg={subMsg} />);
   }
 
   render() {
     let childNode = null;
 
+          console.log("TMP> this.props.status", this.props.status);
     switch (this.props.status) {
-      case "status_search done":
+      case "status_search_done":
         if (this.props.restaurantsData.length) {
           childNode = this._renderRestaurants(
             this.props.restaurantsData, this.props.targetDate, this.props.targetTime);
         } else {
-          // TODO render not found
+          childNode = this._renderNotFoundMessage();
         }
         break;
 
@@ -138,7 +146,7 @@ class RestaurantList extends Component {
 }
 
 export default connect(state => ({
-  status: state.state,
+  status: state.status,
   restaurantsData: state.restaurantsData,
   targetDate: state.searchCondition.targetDate,
   targetTime: state.searchCondition.targetTime
