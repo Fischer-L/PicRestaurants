@@ -32,7 +32,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            plugins: ["transform-react-jsx", "transform-runtime", "babel-plugin-transform-regenerator"],
+            plugins: ["transform-react-jsx", "transform-class-properties", "transform-runtime", "babel-plugin-transform-regenerator"],
             presets: ['babel-preset-env'],
           }
         }

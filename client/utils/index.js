@@ -1,31 +1,3 @@
-import PropTypes from "prop-types";
-
-const APP_TYPE = {};
-
-APP_TYPE.open = PropTypes.shape({
-  // 00:00 ~ 23:59
-  end: PropTypes.string.isRequired,
-  // 00:00 ~ 23:59
-  start:  PropTypes.string.isRequired,
-  // 0 ~ 6; 0 is Sun, 6 is Sat
-  day: PropTypes.number.isRequired,
-});
-
-APP_TYPE.openDays =
-  PropTypes.arrayOf(APP_TYPE.open.isRequired).isRequired;
-
-APP_TYPE.restaurant = PropTypes.shape({
-  name: PropTypes.string.isRequired,
-  address: PropTypes.string.isRequired,
-  openDays: APP_TYPE.openDays.isRequired,
-  url: PropTypes.string,
-  rating: PropTypes.number,
-  photos: PropTypes.arrayOf(PropTypes.string),
-  displayPhone:  PropTypes.string,
-});
-
-APP_TYPE.restaurants = PropTypes.arrayOf(APP_TYPE.restaurant).isRequired;
-
 function isScriptingURL(url) {
   return url.indexOf("javascript") === 0;
 }
@@ -38,7 +10,7 @@ function parse24Hours(time) {
   let hh = parseInt(time.substr(0, 2));
   let mm = parseInt(time.substr(2, 2));
   if (0 <= hh && hh <= 23 && 0 <= mm && mm <= 59) {
-    return time.substr(0, 2) + ":" + time.substr(2, 2);
+    return { hh, mm };
   }
   return null;
 }
@@ -47,7 +19,7 @@ function parse24Hours(time) {
  * Somewhere in our app should do data sanitization and here it is.
  *
  * @restaurants {Array} the data of restaurants from the backend
- * @return {Array} the sanitized data, see APP_TYPE.restaurant for data format.
+ * @return {Array} the sanitized data, see APP_TYPE.restaurantData for data format.
  */
 function sanitizeRestaurants(restaurants) {
   let cleanData = [];
@@ -193,4 +165,4 @@ async function searchRestaurants(location) {
   return data;
 };
 
-export { APP_TYPE, searchRestaurants };
+export { searchRestaurants };

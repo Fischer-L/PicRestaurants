@@ -18,50 +18,22 @@ const yelpRatingIcons = new Map([
 
 class Restaurant extends Component {
 
-  _findOpenTime(restaurant, date) {
-    let hh = date.getHours();
-    let mm = date.getMinutes();
-    let day = date.getDay();
-    for (let i = restaurant.openDays.length - 1; i >= 0; --i) {
-      let time = restaurant.openDays[i];
-      if (time.day === day) {
-        let endHH = parseInt(time.end.substr(0, 2));
-        let endMM = parseInt(time.end.substr(3, 2));
-        if (hh <= endHH && mm <= endMM) {
-          let startHH = parseInt(time.start.substr(0, 2));
-          let startMM = parseInt(time.start.substr(3, 2));
-          if (hh >= startHH && mm >= startMM) {
-            return time;
-          }
-        }
-      }
-    }
-    return null;
-  }
-
   render() {
-    let data = this.props.data;
+    let data = this.props;
     let name = data.name;
     let url = data.url ? encodeURI(data.url) : "javascript:void(0)";
     let address = data.address;
+    let open = data.open;
     let phone = data.displayPhone || "";
-
-    let photo = "./assets/placeholder_img.png";
-    if (data.photos &&  data.photos.length) {
-      photo = encodeURI(data.photos[0]);
-    }
-    let imgStyle = {
-      backgroundImage: `url(${photo})`
-    };
 
     let rating = data.rating > 0 ? data.rating : 0;
     let ratingImg = yelpRatingIcons.get(rating);
-    let open = this._findOpenTime(data, new Date());
-    if (open) {
-      open = `${open.start} ~ ${open.end}`;
-    } else {
-      open = "Not in open hour"
-    }
+    
+    let photo = 
+      data.photo ? encodeURI(data.photo) : "./assets/placeholder_img.png";
+    let imgStyle = {
+      backgroundImage: `url(${photo})`
+    };
 
     return (
       <div className="app-restaurant">
