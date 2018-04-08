@@ -8,6 +8,14 @@
   display: block;
 }
 
+.app-status-img.app-loading {
+  width: 3em;
+  animation-name: rotate-img;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
 .app-status-msg {
   text-align: center;
 }
@@ -15,4 +23,13 @@
 .app-status-msg--main {
   margin: 0.1em 0 1em 0; 
   font-style: italic;
+}
+
+@keyframes rotate-img {
+  0% { 
+    transform: rotate(0deg);
+  }
+  100% { 
+    transform: rotate(360deg);
+  }
 }

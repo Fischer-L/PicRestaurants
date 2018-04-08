@@ -114,10 +114,18 @@ class RestaurantList extends Component {
     return (<StatusMessage img={img} mainMsg={mainMsg} subMsg={subMsg} />);
   }
 
+  _renderSearchingMessage() {
+    let img = "./assets/loading.svg";
+    let mainMsg = "";
+    let subMsg = "Searching great restaurants around your location...";
+    return (<StatusMessage useLoading={true} img={img} mainMsg={mainMsg} subMsg={subMsg} />);
+  }
+
   render() {
     let childNode = null;
 
-          console.log("TMP> this.props.status", this.props.status);
+    console.log("TMP> this.props.status", this.props.status);
+
     switch (this.props.status) {
       case "status_search_done":
         if (this.props.restaurantsData.length) {
@@ -129,6 +137,7 @@ class RestaurantList extends Component {
         break;
 
       case "status_searching":
+        childNode = this._renderSearchingMessage();
         break;
 
       default:
