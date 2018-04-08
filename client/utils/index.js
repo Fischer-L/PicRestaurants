@@ -201,12 +201,13 @@ async function searchRestaurants(location) {
     if (data && data.data && data.data.search && data.data.search.business) {
       data = sanitizeRestaurants(data.data.search.business);
     } else {
-      throw `Unexpected data format of ${data}`;
+      throw `Unexpected data format of ${JSON.stringify(data)}`;
     }
 
   } catch(e) {
     // Print out so know what's wrong.
     console.error(e);
+    data = [];
   }
   cache.set(location, data);
   return data;

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import "./Restaurant.scss";
 
@@ -53,5 +54,15 @@ class Restaurant extends Component {
     );
   }
 }
+
+Restaurant.propTypes = {
+  name: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  businessHour: PropTypes.string.isRequired,
+  url: PropTypes.string,
+  phone: PropTypes.string,
+  photo: PropTypes.string,
+  rating: PropTypes.number,
+};
 
 export default Restaurant;

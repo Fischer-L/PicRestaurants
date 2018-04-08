@@ -19,7 +19,7 @@ APP_TYPE.open = PropTypes.shape({
 });
 
 APP_TYPE.openDays =
-  PropTypes.arrayOf(APP_TYPE.open.isRequired).isRequired;
+  PropTypes.arrayOf(APP_TYPE.open.isRequired);
 
 APP_TYPE.restaurantData = PropTypes.shape({
   name: PropTypes.string.isRequired,
@@ -31,7 +31,7 @@ APP_TYPE.restaurantData = PropTypes.shape({
   displayPhone:  PropTypes.string,
 });
 
-APP_TYPE.restaurantsData = PropTypes.arrayOf(APP_TYPE.restaurantData).isRequired;
+APP_TYPE.restaurantsData = PropTypes.arrayOf(APP_TYPE.restaurantData);
 
 APP_TYPE.targetLoc = PropTypes.string;
 APP_TYPE.targetDate = PropTypes.string; // "YYYY-MM-DD"
@@ -45,7 +45,7 @@ APP_TYPE.searchCondition = PropTypes.shape({
 // status_idle: Waiting user to search restaurants
 // status_searching: Loading restaurants
 // status_search_done: Done with the restaurants search
-APP_TYPE.status = PropTypes.string.isRequired;
+APP_TYPE.status = PropTypes.string;
 
 export { APP_TYPE };
 

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import "./RestaurantList.scss";
 
+import { APP_TYPE } from "../reducers";
 import Restaurant from "./Restaurant";
 import StatusMessage from "./StatusMessage";
 
@@ -151,6 +152,13 @@ class RestaurantList extends Component {
     );
   }
 }
+
+RestaurantList.propTypes = {
+  status: APP_TYPE.status.isRequired,
+  restaurantsData: APP_TYPE.restaurantsData.isRequired,
+  targetDate: APP_TYPE.targetDate,
+  targetTime: APP_TYPE.targetTime,
+};
 
 export default connect(state => ({
   status: state.status,

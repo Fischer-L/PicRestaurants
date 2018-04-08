@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import "./StatusMessage.scss";
 
@@ -17,5 +18,12 @@ class StatusMessage extends Component {
     );
   }
 }
+
+StatusMessage.propTypes = {
+  useLoading: PropTypes.bool,
+  img: PropTypes.string,
+  mainMsg: PropTypes.string,
+  subMsg: PropTypes.string
+};
 
 export default StatusMessage;
