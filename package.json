@@ -35,7 +35,9 @@
   },
   "scripts": {
     "build": "npm run clean && npm run copy_assets && webpack",
-    "start": "npm-run-all -p build server",
+    "build-watch": "npm run build && webpack --watch --info-verbosity verbose",
+    "dev": "npm-run-all -p build-watch server",
+    "start": "npm run build && npm run server",
     "server": "node ./server/server.js",
     "copy_assets": "copyfiles client/assets/*.* client/assets/**/*.* ./dist/assets -f",
     "clean": "rimraf ./dist"
