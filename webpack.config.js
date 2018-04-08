@@ -1,5 +1,24 @@
 const path = require("path");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const production = process.env.NODE_ENV === "production";
+const options = {};
+
+options.webpackMode = production ? "production" : "development";
+
+options.HtmlWebpackPlugin = {
+  template: "./client/index.html",
+};
+if (production) {
+  options.HtmlWebpackPlugin.minify = {
+    removeAttributeQuotes: true,
+    collapseWhitespace: true,
+    html5: true,
+    minifyCSS: true,
+    removeComments: true,
+    removeEmptyAttributes: true,
+  };
+} 
 
 module.exports = {
   entry: {
@@ -12,14 +31,12 @@ module.exports = {
     publicPath: "/"
   },
 
-  mode: "development",
-
   devtool: 'source-map',
 
+  mode: options.webpackMode,
+
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "./client/index.html"
-    })
+    new HtmlWebpackPlugin(options.HtmlWebpackPlugin)
   ],
 
   module: {
