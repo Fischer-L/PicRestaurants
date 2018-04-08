@@ -9,7 +9,18 @@ const paths = {
   indexPage: path.resolve('./dist/index.html')
 };
 
+const validRoutes = [ "/", "/restaurants" ];
+
 app.use(express.static(paths.publicDir));
+
+app.all("*", (req, res, next) => {
+  if (validRoutes.includes(req.path)) {
+    next();
+    return;
+  }
+  // For unknown requests, redirect to the entry point
+  res.redirect("/");
+});
 
 app.get("/", (req, res) => {
   res.sendFile(paths.indexPage);
