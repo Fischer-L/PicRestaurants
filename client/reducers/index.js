@@ -1,6 +1,14 @@
 import PropTypes from "prop-types";
 import { combineReducers } from "redux";
 
+// Our app state is as below:
+// {
+//   status: APP_TYPE.status,
+//
+//   restaurantData: APP_TYPE.restaurantData,
+//
+//   searchCondition: APP_TYPE.searchCondition,
+// }
 const APP_TYPE = {};
 
 APP_TYPE.open = PropTypes.shape({

@@ -38,4 +38,4 @@ app.get("/restaurants", (req, res) => {
   getRestaurants(query, onOK, onError);
 });
 
-app.listen(3000, () => console.log("PicRestaurant app listening on localhost:3000!"));
+app.listen(3000, () => console.log("PicRestaurants app listening on localhost:3000!"));
