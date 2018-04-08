@@ -124,8 +124,6 @@ class RestaurantList extends Component {
   render() {
     let childNode = null;
 
-    console.log("TMP> this.props.restaurantsData", this.props.restaurantsData);
-
     switch (this.props.status) {
       case "status_search_done":
         if (this.props.restaurantsData.length) {

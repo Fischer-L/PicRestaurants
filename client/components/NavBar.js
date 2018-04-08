@@ -22,7 +22,6 @@ class NavBar extends Component {
   // So we populate the input values inside our component here.
   _populateSearchCondition() {
     let { targetLoc, targetDate, targetTime } = this.props.searchCondition;
-    console.log("TMP> _populateSearchCondition - targetLoc, targetDate, targetTime", targetLoc, targetDate, targetTime);
     this.locInput.value = targetLoc || "";
     this.dateInput.value = targetDate || "";
     this.timeInput.value = targetTime || "";
@@ -44,7 +43,6 @@ class NavBar extends Component {
     this.props.setSearchCondition(targetLoc, targetDate, targetTime);
     this.props.setAppStatus("status_searching");
     window.requestAnimationFrame(async () => {
-      console.log("TMP> search - targetLoc, targetDate, targetTime", targetLoc, targetDate, targetTime);
       let data = await searchRestaurants(targetLoc.toLowerCase());
       this.props.setRestaurants(data);
       this.props.setAppStatus("status_search_done");
