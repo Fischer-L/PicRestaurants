@@ -79,12 +79,14 @@ function sanitizeRestaurants(restaurants) {
     if (!isScriptingURL(rest.url)) {
       data.url = rest.url;
     } else {
+      data.url = "";
       unexpecteds.push("url");
     }
 
     if (rest.rating >= 0) {
       data.rating = rest.rating;
     } else {
+      data.rating = 0;
       unexpecteds.push("rating");
     }
 
@@ -96,12 +98,14 @@ function sanitizeRestaurants(restaurants) {
         return photos;
       }, data.photos);
     } else {
+      data.photos = null;
       unexpecteds.push("photos");
     }
 
     if (nonEmptyString(rest.display_phone)) {
       data.displayPhone = rest.display_phone;
     } else {
+      data.displayPhone = "";
       unexpecteds.push("display_phone");
     }
     // Optional data end
@@ -200,6 +204,7 @@ async function searchRestaurants(location) {
     data = await resp.json();
     if (data && data.data && data.data.search && data.data.search.business) {
       data = sanitizeRestaurants(data.data.search.business);
+      data.sort((a, b) => (a.rating - b.rating) * -1);
     } else {
       throw `Unexpected data format of ${JSON.stringify(data)}`;
     }
