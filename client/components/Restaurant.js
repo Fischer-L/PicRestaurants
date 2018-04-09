@@ -22,7 +22,6 @@ class Restaurant extends Component {
   render() {
     let data = this.props;
     let name = data.name;
-    let url = data.url ? encodeURI(data.url) : "javascript:void(0)";
     let address = data.address;
     let businessHour = data.businessHour;
     let phone = data.phone || "";
@@ -36,9 +35,17 @@ class Restaurant extends Component {
       backgroundImage: `url(${photo})`
     };
 
+    let linkProps = {
+      href: "javascript:void(0)"
+    };
+    if (data.url) {
+      linkProps.href = encodeURI(data.url);
+      linkProps.target = "_blank";
+    }
+
     return (
       <div className="app-restaurant">
-        <a className="app-restaurant__link" href={url} >
+        <a className="app-restaurant__link" {...linkProps} >
           <img className="app-restaurant__img" style={imgStyle} />
           <div className="app-restaurant__body">
             <h6 className="app-restaurant-title">{name}</h6>
