@@ -1,7 +1,7 @@
 # PicRetaurants
 
 ## How to run
-1. Install nodejs and yarn(optional).
+1. Install nodejs(7+) and yarn(optional).
 
 2. Clone this repo and then navigate into the repo directory.
 
@@ -13,10 +13,16 @@
 
 6. Open `localhost:3000` on the latest Chrome or Firefox
 
+   - In case you aren't able to run the app. Here is this project's environment for reference:
+     - MAC OS 10.12.6
+     - node v9.4.0
+     - yarn 1.3.2
+     - npm 5.6.0
+
 <img width="480" src="./demo.gif">
 
 ## How to build the client side assets
-1. Install nodejs and yarn(optional).
+1. Install nodejs(7+) and yarn(optional).
 
 2. Clone this repo and then navigate into the repo directory.
 
@@ -54,7 +60,7 @@
 
   1. Our client side is utilizing the node.js so quicker and simpler to continue with the node.js for the server developement.
 
-  2. The Express APIs are eazy-understood and well-documented so go for it.
+  2. The Express APIs are eazy-understood(quick for using), well-documented(good for maintenance) and popular(safer for long-run support) so go for it.
 
   [1] http://expressjs.com/
 
@@ -73,7 +79,9 @@
 #### Are there any improvements you could make?
 - More polished styles
 
-- Take care of the case if no opening restaurants in the first returned 50 restaurants (though this may be a edge case)
+- Take care of the case if no opening restaurants in the first returned 50 restaurants(though this may be a rare case)
+
+- Adopting the flow.js and/or immutable.js
 
 - Add tests
 
@@ -81,23 +89,13 @@
 
 - Design the more detailed data transmission protocol between the server and the client
 
-- Adopting the flow.js and/or immutable.js
+- Even do the server-side cache
 
 #### What would you do differently if you were allocated more time?
 - May not use the node Express but PHP, ROR etc. For the long run, the performance, maintenance and scalability are all important considerations to build a server.  
 
 #### Consider time-zone differences
-- Thanks to Yelp. It returns a restaurant's opening hours in the local time so we just filter the time based on user's input. Here we assume users would take the time zone factor while entering the time, such as, "13:00, London" means 13:00 in London local time. We don't setup a extra time zone flag on our UI and make the above assumption implicitly because any extra UI control could confuse users more.
+- Thanks to Yelp. It returns a restaurant's opening hours in the local time so we just filter the time based on user's input. Here we assume users would take the time zone factor while entering the time, such as, "13:00, London" means 13:00 in London local time. We make the above assumption implicitly and don't setup a extra time zone flag on our UI because any extra UI control could confuse users more.
 
 #### Remember the most recent searched location
-- We use the sessionStorage to cache recent search results. Why the sessionStorage is because we are not sure the update frequency of restaurants data in the 3rd-part Yelp. If we cached in the localStorage/indexedDB, we might save outdated data.
-
-
-
-
-
-
-
-
-
-
+- We use the sessionStorage to cache recent search results. Why the sessionStorage is because we are not sure the update frequency of restaurants data in the 3rd-party Yelp. If we cached in the localStorage/indexedDB, we might save outdated data.
