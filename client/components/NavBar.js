@@ -27,7 +27,38 @@ class NavBar extends Component {
     this.timeInput.value = targetTime || "";
   }
 
-  search = () => {
+  _scheduleSearch(location) {
+    // Lazy creation...
+    if (!this._currentSearchRequest) {
+      this._currentSearchRequest = {};
+      this._currentSearchRequest.run = async () => {
+        let loc = this._currentSearchRequest.location;
+        let data = await searchRestaurants(loc);
+        if (loc !== this._currentSearchRequest.location) {
+          // The search location has changed.
+          // These results now are outdated...
+          return; 
+        }
+        this._currentSearchRequest.handle = 
+        this._currentSearchRequest.location = null;
+        this.props.setRestaurants(data);
+        this.props.setAppStatus("status_search_done");
+      };
+    }
+    
+    location = location.toLowerCase();
+    if (this._currentSearchRequest.location === location) {
+      return; // Already under searching
+    }
+    if (this._currentSearchRequest.handle) {
+      window.cancelAnimationFrame(this._currentSearchRequest.handle);
+    }
+    this._currentSearchRequest.location = location;
+    this._currentSearchRequest.handle =
+      window.requestAnimationFrame(this._currentSearchRequest.run);
+  }
+
+  search() {
     let targetLoc = this.locInput.value;
     let targetDate = this.dateInput.value;
     let targetTime = this.timeInput.value;
@@ -40,11 +71,7 @@ class NavBar extends Component {
 
     this.props.setSearchCondition(targetLoc, targetDate, targetTime);
     this.props.setAppStatus("status_searching");
-    window.requestAnimationFrame(async () => {
-      let data = await searchRestaurants(targetLoc.toLowerCase());
-      this.props.setRestaurants(data);
-      this.props.setAppStatus("status_search_done");
-    });
+    this._scheduleSearch(targetLoc);
   }
 
   onKeyUp = e => {
