@@ -27,9 +27,7 @@ class NavBar extends Component {
     this.timeInput.value = targetTime || "";
   }
 
-  search = e => {
-    e.preventDefault();
-    e.stopPropagation();
+  search = () => {
     let targetLoc = this.locInput.value;
     let targetDate = this.dateInput.value;
     let targetTime = this.timeInput.value;
@@ -49,6 +47,18 @@ class NavBar extends Component {
     });
   }
 
+  onKeyUp = e => {
+    if (e.key.toLowerCase() == "enter") {
+      this.search();
+    } 
+  }
+
+  onClick = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.search();
+  }
+
   render() {
     return (
       <nav className="app-navbar">
@@ -58,12 +68,12 @@ class NavBar extends Component {
         <section className="app-navbar__bottom">
           <div className="app-navbar__panel app-content-area">
             <input id="app-navbar__loc" className="app-navbar__loc" type="text" placeholder="taipei"
-                   ref={input => this.locInput = input} />
+                   ref={input => this.locInput = input} onKeyUp={this.onKeyUp} />
             <input id="app-navbar__date" className="app-navbar__date" type="date" 
-                   ref={input => this.dateInput = input} />
+                   ref={input => this.dateInput = input} onKeyUp={this.onKeyUp} />
             <input id="app-navbar__time" className="app-navbar__time" type="time"
-                   ref={input => this.timeInput = input} />
-            <button className="app-navbar__search" onClick={this.search} onTouchEnd={this.search}>Search</button>
+                   ref={input => this.timeInput = input} onKeyUp={this.onKeyUp} />
+            <button className="app-navbar__search" onClick={this.onClick} onTouchEnd={this.onClick}>Search</button>
           </div>
         </section>
       </nav>
