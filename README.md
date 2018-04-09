@@ -32,7 +32,7 @@
 - The client side
   - Let user search 50 restaurants at most based on a location, date(optional) and time(optional)
 
-  - Restautrants are sorted by ratings
+  - Restautrants are sorted by opening/not-opening and ratings
 
   - Cache search results for this session
 
@@ -40,6 +40,8 @@
 
 - The server side
   - Utilize Yelp's graphQL API to search restaurants
+
+  - Accept the restaurant search requests from the client side
 
   - The API key is on the server side so will not be exposed to the client.
 
@@ -50,7 +52,7 @@
 
 - The node Express server[1]: the Yelp GraphQL dosen't allow "Access-Control-Allow-Origin" so we have to build a server to query data on our own. The reasons to chose the node.js and the Express are:
 
-  1. Our client side is utilizing the node.js so quicker and simpler to continue with the node.js for the server developemnt.
+  1. Our client side is utilizing the node.js so quicker and simpler to continue with the node.js for the server developement.
 
   2. The Express APIs are eazy-understood and well-documented so go for it.
 
@@ -63,15 +65,15 @@
   - Address: where is this restaurant?
   - Photo: how does the food or restaurant looks like?
   - Rating: is this a delicious restaurant?
-  - Businees hour: is this restaurant in businees?
-  - URL: maybe I want ot know more about this restaurant
+  - Business hour: is this restaurant in business?
+  - URL: maybe I want to know more about this restaurant
 
-- Rating is important on making a decision so go fetching data based on the rating. Let's collect the top delicious restaurants and all their opening times from Yelp first. Then we can cache these restaurants and filter based on the input time. If we passed the time criterion to Yelp, our data would be bound to the time, as a result, once users change the time criterion we have to turn to Yelp again, which is bad for the network usage.
+- Rating is important on making a decision so go fetching data based on the rating. Let's collect top delicious restaurants and all their opening times from Yelp first. Then we can cache these restaurants and filter based on the input time. If we passed the time criterion to Yelp, our data would be bound to the time, as a result, once users change the time criterion we have to turn to Yelp again, which is bad for the network usage.
 
 #### Are there any improvements you could make?
 - More polished styles
 
-- Take care of the case if no opening restaurants in the first rerturned 50 restaurants
+- Take care of the case if no opening restaurants in the first returned 50 restaurants (though this may be a edge case)
 
 - Add tests
 
@@ -85,7 +87,7 @@
 - May not use the node Express but PHP, ROR etc. For the long run, the performance, maintenance and scalability are all important considerations to build a server.  
 
 #### Consider time-zone differences
-- Thanks to Yelp. It returns a restaurant's opening hours in the local time so we just filter the time based on user's input. 
+- Thanks to Yelp. It returns a restaurant's opening hours in the local time so we just filter the time based on user's input. Here we assume users would take the time zone factor while entering the time, such as, "13:00, London" means 13:00 in London local time. We don't setup a extra time zone flag on our UI and make the above assumption implicitly because any extra UI control could confuse users more.
 
 #### Remember the most recent searched location
 - We use the sessionStorage to cache recent search results. Why the sessionStorage is because we are not sure the update frequency of restaurants data in the 3rd-part Yelp. If we cached in the localStorage/indexedDB, we might save outdated data.
