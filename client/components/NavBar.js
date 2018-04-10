@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { setRestaurants, setSearchCondition, setAppStatus } from "../actions";
 import { searchRestaurants } from "../utils";
+import { APP_TYPE } from "../reducers";
 
 import "./NavBar.scss";
 
@@ -16,7 +17,7 @@ class NavBar extends Component {
     this._populateSearchCondition();
   }
 
-  // User may changes the location, date and time many times.
+  // Users may change the location, date and time many times.
   // We only want to update the search condition state when user 
   // explictly commands the search operation to reduce unneccessary reflows.
   // So we populate the input values inside our component here.
@@ -108,8 +109,11 @@ class NavBar extends Component {
   }
 }
 
+NavBar.propTypes = {
+  searchCondition: APP_TYPE.searchCondition.isRequired,
+};
+
 export default connect(state => ({
-  targetLoc: state.targetLoc,
   searchCondition: state.searchCondition
 }), {
   setRestaurants,

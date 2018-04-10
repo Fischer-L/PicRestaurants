@@ -25,7 +25,7 @@ const cache = {
       doLater(() => {
         let data = null;
         try {
-          data = sessionStorage.getItem(location)
+          data = sessionStorage.getItem(location);
           if (data) {
             data = JSON.parse(data);
           }
