@@ -1,4 +1,4 @@
-# PicRetaurants
+# PicRestaurants
 
 ## How to run
 1. Install nodejs(7+) and yarn(optional).

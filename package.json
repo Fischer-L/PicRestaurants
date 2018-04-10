@@ -1,7 +1,7 @@
 {
-  "name": "PicRetaurants",
+  "name": "PicRestaurants",
   "version": "1.0.0",
-  "repository": "git@github.com:Fischer-L/PicRetaurants.git",
+  "repository": "git@github.com:Fischer-L/PicRestaurants.git",
   "author": "<fischer.json@gmail.com>",
   "license": "MIT",
   "dependencies": {
