@@ -9,6 +9,7 @@ function getRestaurants(query, onOK, onError) {
   let querys = [
     `limit: 50`,
     `sort_by: "rating"`,
+    `term: "restaurants"`,
     `location: "${query.location}"`
   ];
 
