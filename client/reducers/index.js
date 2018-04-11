@@ -57,12 +57,33 @@ APP_TYPE.status = PropTypes.string;
 
 export { APP_TYPE };
 
+function padWithZero(v) {
+  return v < 10 ? "0" + v : "" + v;
+}
+
 function defaultSearchCondition() {
-  let now = (new Date()).toISOString().split("T");
+  // First make sure the time is always zero UTC offset. 
+  let now = (new Date()).toISOString();
+  let YYYY = parseInt(now.substr(0, 4));
+  let MM = parseInt(now.substr(5, 2)) - 1;
+  let DD = parseInt(now.substr(8, 2));
+  let hh = parseInt(now.substr(11, 2));
+  let mm = parseInt(now.substr(14, 2));
+  let ss = parseInt(now.substr(17, 2));
+  now = new Date(YYYY, MM, DD, hh, mm, ss);
+
+  // Recalculate `now` based on the timezone
+  now = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+  YYYY = now.getFullYear();
+  MM = padWithZero(now.getMonth());
+  DD = padWithZero(now.getDate());
+  hh = padWithZero(now.getHours());
+  mm = padWithZero(now.getMinutes());
+
   return {
     targetLoc: "",
-    targetDate: now[0],
-    targetTime: now[1].substr(0, 5)
+    targetDate: `${YYYY}-${MM}-${DD}`,
+    targetTime: `${hh}:${mm}`
   };
 }
 
