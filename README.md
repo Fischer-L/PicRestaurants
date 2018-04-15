@@ -77,7 +77,12 @@
 - Rating is important on making a decision so go fetching data based on the rating. Let's collect top delicious restaurants and all their opening times from Yelp first. Then we can cache these restaurants and filter based on the input time. If we passed the time criterion to Yelp, our data would be bound to the time, as a result, once users change the time criterion we have to turn to Yelp again, which is bad for the network usage.
 
 #### Are there any improvements you could make?
-- More polished styles
+- More polished styles, such as
+  - Make the layout of the inputs and button on the top flow better when screen resizes
+  - Fine tune the sizes of the images of idle, not-found, etc displayed under different screen resizes
+  - Currently the RWD big and small screen threshold is 768px based on a iPad size, maybe can divide one more
+    extra large size, say, more 1024px
+  - Pick a nice font (now is using system fonts)
 
 - Take care of the case if no opening restaurants in the first returned 50 restaurants(though this may be a rare case)
 
